@@ -5,34 +5,62 @@
 			 
     <ScrollView>
         <VerticalStackLayout 
-            Spacing="25" 
+            Spacing="60" 
             Padding="30,0" 
             VerticalOptions="Center">
 
             <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                Source="moon.png"
+                SemanticProperties.Description="An all-seeing, moon horoscope teller!"
                 HeightRequest="200"
-                HorizontalOptions="Center" />
-                
-            <Label 
-                Text="Welcome to the Bug Tracker App"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-            
-            <Label 
-                Text="This application is used to track, create, and edit/delete bugs"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App UI"
-                FontSize="18"
-                HorizontalOptions="Center" />
+                WidthRequest="200"
+                HorizontalOptions="Center">
+                    <Image.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="10,10"
+                                Radius="15"
+                                Opacity="0.8"/>
+                    </Image.Shadow>
+                </Image>
+
+            <Frame
+                BackgroundColor="Black"
+                BorderColor="Black"
+                HasShadow="True"
+                CornerRadius="25"
+                HeightRequest="70"
+                WidthRequest="300">
+                    <Label
+                        Text="Horoscope App"
+                        SemanticProperties.HeadingLevel="Level4"
+                        TextColor="Goldenrod"
+                        FontSize="32"
+                        HorizontalOptions="Center" />
+            </Frame>
+
+            <Frame
+                BackgroundColor="Black"
+                BorderColor="Black"
+                HasShadow="True"
+                CornerRadius="10"
+                HeightRequest="150"
+                WidthRequest="300">
+                    <Label
+                        x:Name="HoroscopeLabel"
+                        Text="View your horoscope by selecting your sign and timeframe below"
+                        SemanticProperties.HeadingLevel="Level3"
+                        SemanticProperties.Description="Welcome to the horoscope application"
+                        FontSize="18"
+                        TextColor="White"
+                        HorizontalOptions="Center" />
+            </Frame>
 
             <Button 
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                x:Name="LoadHoroscopeBtn"
+                Text="Load Horoscope"
+                SemanticProperties.Hint="Changes the HoroscopeLabel text"
+                Clicked="OnHoroscopeBtnClick"
+                Background="Grey"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
