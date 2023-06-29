@@ -2,69 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUITestApp.MainPage">
-			 
-    <ScrollView>
-        <VerticalStackLayout 
-            Spacing="60" 
-            Padding="30,0" 
-            VerticalOptions="Center">
 
-            <Image
-                Source="moon.png"
-                SemanticProperties.Description="An all-seeing, moon horoscope teller!"
-                HeightRequest="200"
-                WidthRequest="200"
-                HorizontalOptions="Center">
-                    <Image.Shadow>
-                        <Shadow Brush="Black"
-                                Offset="10,10"
-                                Radius="15"
-                                Opacity="0.8"/>
-                    </Image.Shadow>
-                </Image>
-
+        <ScrollView>
             <Frame
                 BackgroundColor="Black"
-                BorderColor="Black"
-                HasShadow="True"
-                CornerRadius="25"
-                HeightRequest="70"
-                WidthRequest="300">
-                    <Label
-                        Text="Horoscope App"
-                        SemanticProperties.HeadingLevel="Level4"
-                        TextColor="Goldenrod"
-                        FontSize="32"
+                HorizontalOptions="FillAndExpand">
+
+                <VerticalStackLayout 
+                    Spacing="60" 
+                    Padding="30,0" 
+                    VerticalOptions="Center">
+
+                    <Image
+                        Source="horoscope.png"
+                        SemanticProperties.Description="An all-seeing, horoscope fortune-teller!"
+                        HeightRequest="300"
+                        WidthRequest="250"
+                        HorizontalOptions="Center">
+                        <Image.Shadow>
+                            <Shadow Brush="White"
+                                    Offset="10,10"
+                                    Radius="15"
+                                    Opacity="0.4"/>
+                            </Image.Shadow>
+                    </Image>
+
+                            <Label
+                                Text="Horoscope App"
+                                SemanticProperties.HeadingLevel="Level4"
+                                TextColor="Goldenrod"
+                                FontSize="32"
+                                HorizontalOptions="Center" />
+
+                    <Frame
+                        BackgroundColor="White"
+                        BorderColor="Black"
+                        HasShadow="True"
+                        CornerRadius="10"
+                        HeightRequest="150"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                            <Label
+                                x:Name="HoroscopeLabel"
+                                Text="View your horoscope by selecting your sign and timeframe below"
+                                SemanticProperties.HeadingLevel="Level3"
+                                SemanticProperties.Description="Welcome to the horoscope application"
+                                FontSize="16"
+                                TextColor="Black"
+                                HorizontalOptions="Center" />
+                    </Frame>
+
+                    <Button 
+                        x:Name="LoadHoroscopeBtn"
+                        Text="Load Horoscope"
+                        SemanticProperties.Hint="Changes the HoroscopeLabel text"
+                        Clicked="OnHoroscopeBtnClick"
+                        Background="Grey"
                         HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
             </Frame>
+        </ScrollView>
 
-            <Frame
-                BackgroundColor="Black"
-                BorderColor="Black"
-                HasShadow="True"
-                CornerRadius="10"
-                HeightRequest="150"
-                WidthRequest="300">
-                    <Label
-                        x:Name="HoroscopeLabel"
-                        Text="View your horoscope by selecting your sign and timeframe below"
-                        SemanticProperties.HeadingLevel="Level3"
-                        SemanticProperties.Description="Welcome to the horoscope application"
-                        FontSize="18"
-                        TextColor="White"
-                        HorizontalOptions="Center" />
-            </Frame>
-
-            <Button 
-                x:Name="LoadHoroscopeBtn"
-                Text="Load Horoscope"
-                SemanticProperties.Hint="Changes the HoroscopeLabel text"
-                Clicked="OnHoroscopeBtnClick"
-                Background="Grey"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
  
 </ContentPage>
 

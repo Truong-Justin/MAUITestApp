@@ -57,9 +57,11 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\moon copy.png" />
 	  <None Remove="Models\" />
+	  <None Remove="Resources\Images\horoscope copy.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\moon.png" />
+	  <BundleResource Include="Resources\Images\horoscope.svg" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
