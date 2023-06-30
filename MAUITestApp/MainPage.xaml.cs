@@ -6,7 +6,6 @@ namespace MAUITestApp;
 public partial class MainPage : ContentPage
 {
 	Horoscope Horoscope = new Horoscope();
-	int count = 0;
 
 
 	public MainPage()
@@ -22,7 +21,7 @@ public partial class MainPage : ContentPage
 	{
 
 		Label horoscopeLabel = (Label)FindByName("HoroscopeLabel");
-		var horoscope = await Horoscope.GetHoroscope();
+		string horoscope = await Horoscope.GetHoroscope();
 		horoscopeLabel.Text = horoscope;
     }
 

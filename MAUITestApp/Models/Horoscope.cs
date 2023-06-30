@@ -4,43 +4,48 @@ namespace MAUITestApp.Models
 {
 	public class Horoscope
 	{
-		// Method will take the two options selected by user to create a key
-		public string MakeKey()
+		readonly HttpClient client = new HttpClient();
+
+		// Method will take the two options selected by user and return the correct API endpoint
+		public string MakeKey(string sign, string timeFrame)
 		{
-			return "";
+			Dictionary<(string, string), string> mappedEndpoints = new Dictionary<(string, string), string>()
+			{
+				//Where (sign, timeFrame) will be mapped to correct URI endpoint
+			};
+
+			return mappedEndpoints[(sign, timeFrame)];
 		}
 
-		// Method will access a specific API endpoint and return the user's horoscope
+		// Method will take URI endpoint as an argument to
+		// be used to return the user's horoscope
 		public async Task<string> GetHoroscope()
 		{
-
-			using (HttpClient client = new HttpClient())
+			try
 			{
-				try
+				// An example API endpoint for testing
+				HttpResponseMessage response = await client.GetAsync("https://horoscopeapi-v6vga.ondigitalocean.app/api/get-horoscope/monthly?sign=aries");
+
+				// If Http response returns 200-299, return the response body
+				if (response.IsSuccessStatusCode)
 				{
-					// An example API endpoint for testing
-					HttpResponseMessage response = await client.GetAsync("https://horoscopeapi-v6vga.ondigitalocean.app/api/get-horoscope/monthly?sign=aries");
+					string responseBody = await response.Content.ReadAsStringAsync();
+					return responseBody;
+				}
 
-						// If Http response returns 200-299, return the response body
-						if (response.IsSuccessStatusCode)
-						{
-							string responseBody = await response.Content.ReadAsStringAsync();
-							return responseBody;
-						}
-
-						// If Http response != 200-299, return the response code only 
-						else
-						{
-							return $"Error, API status code: {response.StatusCode}";
-						}
-					}
-
-					catch (Exception exception)
-					{
-						return exception.ToString();
-					}
+				// If Http response != 200-299, return the response code only 
+				else
+				{
+					return $"Error, API status code: {response.StatusCode}";
 				}
 			}
+
+			catch (Exception exception)
+			{
+				return exception.ToString();
+			}
+
+		}
 
 		
 	}
