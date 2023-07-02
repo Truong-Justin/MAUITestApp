@@ -5,12 +5,16 @@ namespace MAUITestApp;
 
 public partial class MainPage : ContentPage
 {
-	Horoscope Horoscope = new Horoscope();
+	// Object created at the class-level
+	// to enable HTTP requests for as long
+	// as the application needs it 
+	HoroscopeDataAccess Horoscope = new HoroscopeDataAccess();
 
 	public MainPage()
 	{
 		InitializeComponent();
 
+		// Picker elements populated with List<string> of user options
 		HoroscopeSign.ItemsSource = Horoscope.GetHoroscopeSign();
 		TimeFrame.ItemsSource = Horoscope.GetTimeFrame();
 

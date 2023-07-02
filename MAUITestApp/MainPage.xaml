@@ -9,7 +9,7 @@
             BackgroundColor="Black">
 
             <VerticalStackLayout 
-                Spacing="20" 
+                Spacing="10" 
                 Padding="10" 
                 VerticalOptions="Center">
 
@@ -50,24 +50,26 @@
                         HorizontalTextAlignment="Center">
                 </Picker>
 
-                <Frame
-                    BackgroundColor="White"
-                    BorderColor="White"
-                    HasShadow="True"
-                    CornerRadius="10"
-                    HeightRequest="250"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="StartAndExpand">
+                    <Frame
+                        BackgroundColor="White"
+                        BorderColor="White"
+                        HasShadow="True"
+                        CornerRadius="10"
+                        HeightRequest="250"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="StartAndExpand">
 
-                        <Label
-                            x:Name="HoroscopeLabel"
-                            Text="View your horoscope by selecting your sign and timeframe below"
-                            SemanticProperties.HeadingLevel="Level3"
-                            SemanticProperties.Description="Welcome to the horoscope application"
-                            FontSize="16"
-                            TextColor="Black"
-                            HorizontalOptions="Center" />
-                </Frame>
+                        <ScrollView>
+                            <Label
+                                x:Name="HoroscopeLabel"
+                                Text="View your horoscope by selecting your sign and timeframe below"
+                                SemanticProperties.HeadingLevel="Level3"
+                                SemanticProperties.Description="Welcome to the horoscope application"
+                                FontSize="16"
+                                TextColor="Black"
+                                HorizontalOptions="Center" />
+                            </ScrollView>
+                    </Frame>
 
                 <Button 
                     x:Name="LoadHoroscopeBtn"
