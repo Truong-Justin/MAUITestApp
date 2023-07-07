@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUITestApp.MainPage">
 
+    <ScrollView>
+
         <Grid
             RowDefinitions="*"
             ColumnDefinitions="*"
@@ -68,7 +70,8 @@
                                 FontSize="16"
                                 TextColor="Black"
                                 HorizontalOptions="Center" />
-                            </ScrollView>
+                        </ScrollView>
+
                     </Frame>
 
                 <Button 
@@ -82,6 +85,8 @@
             </VerticalStackLayout>
 
         </Grid>
+
+    </ScrollView>
 
 </ContentPage>
 

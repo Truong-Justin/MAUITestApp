@@ -5,36 +5,36 @@ namespace MAUITestApp.Models
 {
 	public class HoroscopeDataAccess
 	{
-        readonly HttpClient _client = new HttpClient();
-        JsonSerializerOptions _serializerOptions = new JsonSerializerOptions();
+        private readonly HttpClient _client = new HttpClient();
+        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions();
 
         // Method is used to populate a <picker> tag
         // with a collection containing the different
-        // zodiac signs avaiable to the user to pick from
+        // zodiac signs avaiable to the user to pick from.
 		public List<string> GetHoroscopeSign()
 		{
             List<string> horoscopeList = new List<string>()
-        {
-            "Aries",
-            "Taurus",
-            "Gemini",
-            "Cancer",
-            "Leo",
-            "Virgo",
-            "Libra",
-            "Scorpio",
-            "Sagittarius",
-            "Capricorn",
-            "Aquarius",
-            "Pisces"
-        };
+            {
+                "Aries",
+                "Taurus",
+                "Gemini",
+                "Cancer",
+                "Leo",
+                "Virgo",
+                "Libra",
+                "Scorpio",
+                "Sagittarius",
+                "Capricorn",
+                "Aquarius",
+                "Pisces"
+            };
 
 			return horoscopeList;
         }
 
         // Method is used to populate the <picker> tag
         // with a collection containing the different time-frames
-        // available to the user to pick from
+        // available to the user to pick from.
 		public List<string> GetTimeFrame()
 		{
 			List<string> timeFrameList = new List<string>()
@@ -49,11 +49,11 @@ namespace MAUITestApp.Models
 			return timeFrameList;
 		}
 
-		// Method takes a URI endpoint as an argument and uses
-		// it to call the API endpoint to return to the user their horoscope
-		public async Task<string> GetHoroscope(string endpoint)
+        // Send a GET request to API endpoint,
+        // read the response as a stream,
+        // than deserialize JSON response.
+        public async Task<string> GetHoroscope(string endpoint)
 		{
-            
 			try
 			{
 				HttpResponseMessage response = await _client.GetAsync(endpoint);
@@ -81,9 +81,9 @@ namespace MAUITestApp.Models
 
 
 
-        // Method will take the two options selected by user,
-        // use those two options as a key, use that key to
-        // return the correct API endpoint when the method is called
+        // Method takes the sign and timeframe selected by user,
+        // uses those two options as a key to return the correct
+        // API endpoint when the method is called.
         public string GetEndpoint(string day, string sign)
         {
             string daily = "https://horoscopeapi-v6vga.ondigitalocean.app/api/get-horoscope/daily?sign={0}&day={1}";

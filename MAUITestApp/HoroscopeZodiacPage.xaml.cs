@@ -29,13 +29,18 @@ public partial class MainPage : ContentPage
 		{
             string endpoint = Horoscope.GetEndpoint(TimeFrame.SelectedItem.ToString(), HoroscopeSign.SelectedItem.ToString());
             string horoscope = await Horoscope.GetHoroscope(endpoint);
+
+			await HoroscopeLabel.FadeTo(0, 250, Easing.Linear);
             HoroscopeLabel.Text = horoscope;
+            await HoroscopeLabel.FadeTo(1, 250, Easing.Linear);
         }
 
 		catch (NullReferenceException)
 		{
-			HoroscopeLabel.Text = "You must select a {sign} and {timeframe}";
-		}
+            await HoroscopeLabel.FadeTo(0, 250, Easing.Linear);
+            HoroscopeLabel.Text = "You must select a {sign} and {timeframe}";
+            await HoroscopeLabel.FadeTo(1, 250, Easing.Linear);
+        }
 
 		catch (Exception exception)
 		{
