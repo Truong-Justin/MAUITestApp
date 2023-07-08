@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUITestApp.MainPage">
+
+    <ScrollView>
+
+        <Grid
+            RowDefinitions="Auto, *"
+            ColumnDefinitions="*"
+            BackgroundColor="Black">
+
+            <VerticalStackLayout 
+                Spacing="10" 
+                Padding="10" 
+                VerticalOptions="Center">
+
+                <Frame
+                    BackgroundColor="White"
+                    BorderColor="White"
+                    HasShadow="True"
+                    CornerRadius="30"
+                    HeightRequest="250"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand">
+
+                    <Image
+                        Source="moon.png"
+                        HeightRequest="200"
+                        WidthRequest="200">
+                    </Image>
+
+                </Frame>
+
+                <Frame
+                    BackgroundColor="Grey"
+                    Opacity=".8"
+                    CornerRadius="30"
+                    HeightRequest="250"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="StartAndExpand">
+
+                    <Label
+                        TextColor="White"
+                        Text="This is lorem ipsum"
+                        FontSize="20">
+                    </Label>
+
+                </Frame>
+
+            </VerticalStackLayout>
+
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>
+

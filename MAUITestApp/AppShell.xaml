@@ -6,10 +6,23 @@
     xmlns:local="clr-namespace:MAUITestApp"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+
+        <ShellContent
+            Title="Horoscope"
+            ContentTemplate="{DataTemplate local:HoroscopePage}"
+            Route="HoroscopePage"/>
+         
+        <ShellContent
+            Title="Chinese Horoscope"
+            ContentTemplate="{DataTemplate local:ChineseHoroscopePage}"
+            Route="ChineseHoroscopePage" />
+
+    </TabBar>
 
 </Shell>
 
