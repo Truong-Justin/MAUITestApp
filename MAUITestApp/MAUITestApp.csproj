@@ -56,15 +56,18 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\moon copy.png" />
-	  <None Remove="Models\" />
 	  <None Remove="Resources\Images\horoscope copy.svg" />
+	  <None Remove="ViewModels\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\moon.png" />
 	  <BundleResource Include="Resources\Images\horoscope.svg" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Models\" />
+	  <Folder Include="ViewModels\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 	</ItemGroup>
 </Project>
 

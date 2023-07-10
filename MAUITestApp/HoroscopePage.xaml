@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MAUITestApp.ViewModel"
              x:Class="MAUITestApp.HoroscopePage"
              Title="HoroscopePage">
-
+    <ContentPage.BindingContext>
+        <local:HoroscopePageViewModel />
+    </ContentPage.BindingContext>
     <ScrollView>
 
         <Grid
@@ -43,6 +46,22 @@
                         Background="GoldenRod"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Aries</x:String>
+                            <x:String>Taurus</x:String>
+                            <x:String>Gemini</x:String>
+                            <x:String>Cancer</x:String>
+                            <x:String>Leo</x:String>
+                            <x:String>Virgo</x:String>
+                            <x:String>Libra</x:String>
+                            <x:String>Scorpius</x:String>
+                            <x:String>Saggitarius</x:String>
+                            <x:String>Capricorn</x:String>
+                            <x:String>Aquarius</x:String>
+                            <x:String>Pisces</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
                 </Picker>
 
                 <Picker x:Name="TimeFrame"
@@ -51,6 +70,16 @@
                         Background="Grey"
                         HorizontalOptions="Center"
                         HorizontalTextAlignment="Center">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Yesterday</x:String>
+                            <x:String>Today</x:String>
+                            <x:String>Tomorrow</x:String>
+                            <x:String>Weekly</x:String>
+                            <x:String>Monthly</x:String>
+                        </x:Array>
+
+                    </Picker.ItemsSource>
                 </Picker>
 
                     <Frame
@@ -66,7 +95,7 @@
 
                             <Label
                                 x:Name="HoroscopeLabel"
-                                Text="View your horoscope by selecting your sign and timeframe below"
+                                Text="{Binding DisplayHoroscope}"
                                 SemanticProperties.HeadingLevel="Level3"
                                 SemanticProperties.Description="Welcome to the horoscope application"
                                 FontSize="18"
@@ -79,9 +108,9 @@
 
                 <Button 
                     x:Name="LoadHoroscopeBtn"
+                    Command="{Binding MyCommand}"
                     Text="Load Horoscope"
                     SemanticProperties.Hint="Changes the HoroscopeLabel text"
-                    Clicked="OnHoroscopeBtnClick"
                     Background="Grey"
                     HorizontalOptions="Center" />
 

@@ -1,85 +1,76 @@
-﻿using System.Net.Http;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Windows.Input;
 
-namespace MAUITestApp.Models
+
+namespace MAUITestApp.ViewModel
 {
-	public class HoroscopeDataAccess
+	public class HoroscopePageViewModel : INotifyPropertyChanged
 	{
-        private readonly HttpClient _client = new HttpClient();
-        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions();
+        HoroscopeViewModel horoscope;
+        public ICommand MyCommand { private set; get; }
 
-        // Method is used to populate a <picker> tag
-        // with a collection containing the different
-        // zodiac signs avaiable to the user to pick from.
-		public List<string> GetHoroscopeSign()
-		{
-            List<string> horoscopeList = new List<string>()
-            {
-                "Aries",
-                "Taurus",
-                "Gemini",
-                "Cancer",
-                "Leo",
-                "Virgo",
-                "Libra",
-                "Scorpio",
-                "Sagittarius",
-                "Capricorn",
-                "Aquarius",
-                "Pisces"
-            };
-
-			return horoscopeList;
+        public HoroscopePageViewModel()
+        {
+            MyCommand = new Command(
+                execute: async () =>
+                {
+                    horoscope = new HoroscopeViewModel();
+                    string endpoint = GetEndpoint("Today", "Aries");
+                    horoscope.data = await GetHoroscope(endpoint);
+                    DisplayHoroscope = horoscope.data;
+                });
         }
 
-        // Method is used to populate the <picker> tag
-        // with a collection containing the different time-frames
-        // available to the user to pick from.
-		public List<string> GetTimeFrame()
-		{
-			List<string> timeFrameList = new List<string>()
-			{
-				"Yesterday",
-				"Today",
-				"Tomorrow",
-				"Weekly",
-				"Monthly"
-			};
+        private string HoroscopeOutput;
 
-			return timeFrameList;
-		}
+        public string DisplayHoroscope
+        {
+            
+            get
+            {
+                return HoroscopeOutput;
+            }
+
+            set
+            {
+                HoroscopeOutput = value;
+                OnPropertyChanged();
+            }
+        }
 
         // Send a GET request to API endpoint,
         // read the response as a stream,
         // than deserialize JSON response.
+        private readonly HttpClient _client = new HttpClient();
+        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions();
+
         public async Task<string> GetHoroscope(string endpoint)
-		{
-			try
-			{
-				HttpResponseMessage response = await _client.GetAsync(endpoint);
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(endpoint);
 
-				if (response.IsSuccessStatusCode)
-				{
+                if (response.IsSuccessStatusCode)
+                {
                     Stream responseBody = await response.Content.ReadAsStreamAsync();
-                    Horoscope horoscopeOutput = await JsonSerializer.DeserializeAsync<Horoscope>(responseBody, _serializerOptions);
+                    HoroscopeViewModel horoscopeOutput = await JsonSerializer.DeserializeAsync<HoroscopeViewModel>(responseBody, _serializerOptions);
 
-					return horoscopeOutput.data;
-				}
+                    return horoscopeOutput.data;
+                }
 
-				else
-				{
-					return $"Error, API status code: {response.StatusCode}";
-				}
-			}
+                else
+                {
+                    return $"Error, API status code: {response.StatusCode}";
+                }
+            }
 
-			catch (Exception exception)
-			{
-				return exception.ToString();
-			}
-
-		}
-
-
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+        }
 
         // Method takes the sign and timeframe selected by user,
         // uses those two options as a key to return the correct
@@ -169,6 +160,13 @@ namespace MAUITestApp.Models
             return mappedEndpoints[(day, sign)];
         }
 
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string name = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
     }
 }

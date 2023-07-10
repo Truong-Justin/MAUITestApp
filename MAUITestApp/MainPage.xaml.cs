@@ -1,6 +1,4 @@
-﻿using MAUITestApp.Models;
-
-
+﻿
 namespace MAUITestApp;
 
 public partial class MainPage : ContentPage
