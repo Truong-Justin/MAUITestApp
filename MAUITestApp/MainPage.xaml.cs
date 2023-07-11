@@ -1,5 +1,4 @@
-﻿
-namespace MAUITestApp;
+﻿namespace MAUITestApp;
 
 public partial class MainPage : ContentPage
 {

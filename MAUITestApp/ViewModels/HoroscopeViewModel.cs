@@ -1,14 +1,8 @@
-﻿
-using System.ComponentModel;
-
-namespace MAUITestApp.ViewModel
+﻿namespace MAUITestApp.ViewModel
 {
-	public class HoroscopeViewModel : INotifyPropertyChanged
+	public class HoroscopeViewModel
 	{
 		public string data { get; set; }
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
 
 	}
 }

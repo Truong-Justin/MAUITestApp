@@ -45,7 +45,8 @@
                         TextColor="Black"
                         Background="GoldenRod"
                         HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center">
+                        HorizontalTextAlignment="Center"
+                        SelectedItem="{Binding SelectedHoroscopeSign}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Aries</x:String>
@@ -69,7 +70,8 @@
                         TextColor="Black"
                         Background="Grey"
                         HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center">
+                        HorizontalTextAlignment="Center"
+                        SelectedItem="{Binding SelectedHoroscopeTimeFrame}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Yesterday</x:String>
@@ -108,7 +110,7 @@
 
                 <Button 
                     x:Name="LoadHoroscopeBtn"
-                    Command="{Binding MyCommand}"
+                    Command="{Binding GenerateFortuneCommand}"
                     Text="Load Horoscope"
                     SemanticProperties.Hint="Changes the HoroscopeLabel text"
                     Background="Grey"

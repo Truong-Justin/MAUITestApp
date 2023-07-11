@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MAUITestApp.ChineseHoroscopePage"
+             xmlns:local="clr-namespace:MAUITestApp.ViewModels" 
+             x:Class="MAUITestApp.ChineseZodiacPage"
              Title="ChineseHoroscopePage">
+    <ContentPage.BindingContext>
+        <local:ChineseZodiacPageViewModel />
+    </ContentPage.BindingContext>
      <ScrollView>
 
         <Grid
@@ -35,12 +39,29 @@
                             FontSize="32"
                             HorizontalOptions="Center" />
 
-                <Picker x:Name="HoroscopeSign"
+                <Picker x:Name="ChineseZodiac"
                         Title="Pick your sign"
                         TextColor="Black"
                         Background="Coral"
                         HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center">
+                        HorizontalTextAlignment="Center"
+                        SelectedItem="{Binding SelectedZodiacAnimal}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Rat</x:String>
+                            <x:String>Ox</x:String>
+                            <x:String>Tiger</x:String>
+                            <x:String>Rabbit</x:String>
+                            <x:String>Dragon</x:String>
+                            <x:String>Snake</x:String>
+                            <x:String>Horse</x:String>
+                            <x:String>Sheep</x:String>
+                            <x:String>Monkey</x:String>
+                            <x:String>Rooster</x:String>
+                            <x:String>Dog</x:String>
+                            <x:String>Pig</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
                 </Picker>
 
                 <Picker x:Name="TimeFrame"
@@ -48,7 +69,17 @@
                         TextColor="Black"
                         Background="Grey"
                         HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center">
+                        HorizontalTextAlignment="Center"
+                        SelectedItem="{Binding SelectedTimeFrame}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Yesterday</x:String>
+                            <x:String>Today</x:String>
+                            <x:String>Tomorrow</x:String>
+                            <x:String>Weekly</x:String>
+                            <x:String>Monthly</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
                 </Picker>
 
                     <Frame
@@ -63,8 +94,8 @@
                         <ScrollView>
 
                             <Label
-                                x:Name="HoroscopeLabel"
-                                Text="View your horoscope by selecting your sign and timeframe below"
+                                x:Name="ChineseZodiacLabel"
+                                Text="{Binding DisplayChineseZodiac}"
                                 SemanticProperties.HeadingLevel="Level3"
                                 SemanticProperties.Description="Welcome to the horoscope application"
                                 FontSize="18"
@@ -76,7 +107,8 @@
                     </Frame>
 
                 <Button 
-                    x:Name="LoadHoroscopeBtn"
+                    x:Name="LoadChineseZodiacBtn"
+                    Command="{Binding GenerateFortuneCommand}"
                     Text="Load Horoscope"
                     SemanticProperties.Hint="Changes the HoroscopeLabel text"
                     Background="Grey"

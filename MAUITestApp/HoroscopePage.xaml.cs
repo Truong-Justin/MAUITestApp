@@ -1,11 +1,7 @@
-﻿using MAUITestApp.ViewModel;
-
-namespace MAUITestApp;
+﻿namespace MAUITestApp;
 
 public partial class HoroscopePage : ContentPage
 {
-
-
     public HoroscopePage()
 	{
 		InitializeComponent();

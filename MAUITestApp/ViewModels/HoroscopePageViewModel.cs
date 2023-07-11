@@ -8,44 +8,99 @@ namespace MAUITestApp.ViewModel
 {
 	public class HoroscopePageViewModel : INotifyPropertyChanged
 	{
-        HoroscopeViewModel horoscope;
-        public ICommand MyCommand { private set; get; }
+        public ICommand GenerateFortuneCommand { private set; get; }
 
+
+        // Executes horoscope data-access methods when the
+        // MyCommand button is pressed and outputs fortune to user
         public HoroscopePageViewModel()
         {
-            MyCommand = new Command(
+            GenerateFortuneCommand = new Command(
                 execute: async () =>
                 {
-                    horoscope = new HoroscopeViewModel();
-                    string endpoint = GetEndpoint("Today", "Aries");
-                    horoscope.data = await GetHoroscope(endpoint);
-                    DisplayHoroscope = horoscope.data;
+                    try
+                    {
+                        HoroscopeViewModel horoscope = new HoroscopeViewModel();
+                        string endpoint = GetEndpoint(SelectedHoroscopeTimeFrame, SelectedHoroscopeSign);
+                        horoscope.data = await GetHoroscope(endpoint);
+                        DisplayHoroscope = horoscope.data;
+                    }
+
+                    catch (KeyNotFoundException)
+                    {
+                        DisplayHoroscope = "A {timeframe} and {sign} must be selected";
+                    }
                 });
         }
 
-        private string HoroscopeOutput;
 
+        private string _selectedSign;
+
+
+        // Used to store and retrieve
+        // the horoscope sign chosen by user
+        public string SelectedHoroscopeSign
+        {
+            get
+            {
+                return _selectedSign;
+            }
+
+            set
+            {
+                _selectedSign = value;
+            }
+        }
+
+
+        private string _selectedTimeFrame;
+
+
+        // Used to store and retrieve
+        // the timeframe chosen by user
+        public string SelectedHoroscopeTimeFrame
+        {
+            get
+            {
+                return _selectedTimeFrame;
+            }
+
+            set
+            {
+                _selectedTimeFrame = value;
+            }
+        }
+
+
+        private string _horoscopeText;
+
+
+        // Used to store and retrieve horoscope
+        // fortune data when an API endpoint is
+        // accessed
         public string DisplayHoroscope
         {
             
             get
             {
-                return HoroscopeOutput;
+                return _horoscopeText;
             }
 
             set
             {
-                HoroscopeOutput = value;
+                _horoscopeText = value;
                 OnPropertyChanged();
             }
         }
 
-        // Send a GET request to API endpoint,
-        // read the response as a stream,
-        // than deserialize JSON response.
+    
         private readonly HttpClient _client = new HttpClient();
         private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions();
 
+
+        // Send a GET request to API endpoint,
+        // read the response as a stream,
+        // than deserialize JSON response.
         public async Task<string> GetHoroscope(string endpoint)
         {
             try
@@ -72,8 +127,9 @@ namespace MAUITestApp.ViewModel
             }
         }
 
-        // Method takes the sign and timeframe selected by user,
-        // uses those two options as a key to return the correct
+
+        // Method takes the timeframe and sign selected by user,
+        // and uses those two options as a key to return the correct
         // API endpoint when the method is called.
         public string GetEndpoint(string day, string sign)
         {
@@ -163,6 +219,9 @@ namespace MAUITestApp.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+        // Raises a 'PropertyChanged' event when a property value is changed,
+        // which in this view-model is when the horoscopeText value is changed
         public void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

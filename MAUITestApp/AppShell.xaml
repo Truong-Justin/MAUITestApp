@@ -19,7 +19,7 @@
          
         <ShellContent
             Title="Chinese Horoscope"
-            ContentTemplate="{DataTemplate local:ChineseHoroscopePage}"
+            ContentTemplate="{DataTemplate local:ChineseZodiacPage}"
             Route="ChineseHoroscopePage" />
 
     </TabBar>
